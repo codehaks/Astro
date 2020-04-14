@@ -15,61 +15,23 @@ namespace Moon
             var connection = factory.CreateConnection();
             var channel = connection.CreateModel();
 
-            channel.QueueDeclare(queue: "chatroom", durable: false, exclusive: false, autoDelete: false, arguments: null);
-
+            channel.QueueDeclare(queue: "inbox", durable: false, exclusive: false, autoDelete: false, arguments: null);
+            
             var consumer = new EventingBasicConsumer(channel);
-            consumer.Received += (model, ea) =>
-            {
-                var body = ea.Body;
-                var message = Encoding.UTF8.GetString(body);
+            consumer.Received += Consumer_Received;
 
-                Console.WriteLine(message);
-
-            };
-            channel.BasicConsume(queue: "chatroom", autoAck: false, consumer: consumer);
+            channel.BasicConsume(queue: "inbox", autoAck: false, consumer: consumer);
 
             Console.ReadLine();
 
-
         }
 
-        public class RabbitListener
+        private static void Consumer_Received(object sender, BasicDeliverEventArgs e)
         {
-            ConnectionFactory Factory { get; set; }
-            IConnection Connection { get; set; }
-            IModel Channel { get; set; }
-
-
-            public RabbitListener()
-            {
-                Factory = new ConnectionFactory() { HostName = "localhost" };
-                Connection = Factory.CreateConnection();
-                Channel = Connection.CreateModel();
-
-
-            }
-            public void Register()
-            {
-                
-
-                var consumer = new EventingBasicConsumer(Channel);
-                consumer.Received += (model, ea) =>
-                {
-                    var body = ea.Body;
-                    var message = Encoding.UTF8.GetString(body);
-
-                    Console.WriteLine(message);
-
-                };
-                Channel.BasicConsume(queue: "chatroom", autoAck: false, consumer: consumer);
-            }
-
-            public void Deregister()
-            {
-                this.Connection.Close();
-            }
-
-
+            var body = e.Body;
+            var message = Encoding.UTF8.GetString(body);
+            Console.WriteLine(message);
         }
     }
+
 }

@@ -18,7 +18,7 @@ namespace Earth
             using var channel = connection.CreateModel();
 
 
-            channel.QueueDeclare(queue: "chatroom",
+            channel.QueueDeclare(queue: "inbox",
                                  durable: false,
                                  exclusive: false,
                                  autoDelete: false,
@@ -36,7 +36,7 @@ namespace Earth
                 var body = Encoding.UTF8.GetBytes(message);
 
                 channel.BasicPublish(exchange: "",
-                     routingKey: "chatroom",
+                     routingKey: "inbox",
                      basicProperties: null,
                      body: body);
 
