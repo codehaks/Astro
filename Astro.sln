@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29911.98
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Earth", "src\Earth\Earth.csproj", "{EDD6C308-BB3D-420A-B46F-1FAB94432870}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moon", "src\Moon\Moon.csproj", "{560BD619-8EEA-4F19-BD44-60F9A44C0F6E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EDD6C308-BB3D-420A-B46F-1FAB94432870}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDD6C308-BB3D-420A-B46F-1FAB94432870}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDD6C308-BB3D-420A-B46F-1FAB94432870}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDD6C308-BB3D-420A-B46F-1FAB94432870}.Release|Any CPU.Build.0 = Release|Any CPU
+		{560BD619-8EEA-4F19-BD44-60F9A44C0F6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{560BD619-8EEA-4F19-BD44-60F9A44C0F6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{560BD619-8EEA-4F19-BD44-60F9A44C0F6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{560BD619-8EEA-4F19-BD44-60F9A44C0F6E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B35D042D-4151-4573-AE7A-31FF5F652C72}
+	EndGlobalSection
+EndGlobal
