@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using RabbitMQ.Client;
+using System;
+using System.Text;
 
 namespace Earth
 {
@@ -6,10 +9,42 @@ namespace Earth
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Hello World!");   
+            
+            //--- Setup
 
-            Console.WriteLine("Message :");
-            var message = Console.ReadLine();
+            var factory = new ConnectionFactory() { HostName = "localhost" };
+            using var connection = factory.CreateConnection();
+            using var channel = connection.CreateModel();
+
+
+            channel.QueueDeclare(queue: "chatroom",
+                                 durable: false,
+                                 exclusive: false,
+                                 autoDelete: false,
+                                 arguments: null);
+
+            //--- Chat
+
+            var message = " ";
+
+            while (message!=string.Empty)
+            {
+                Console.WriteLine("Message : ");
+                message = Console.ReadLine();
+                string msg = JsonConvert.SerializeObject(message);
+                var body = Encoding.UTF8.GetBytes(message);
+
+                channel.BasicPublish(exchange: "",
+                     routingKey: "chatroom",
+                     basicProperties: null,
+                     body: body);
+
+                Console.WriteLine(" [Earth] Sent {0}", message);
+            }
+           
+
+
         }
     }
 }
