@@ -32,7 +32,7 @@ namespace Earth
             {
                 Console.WriteLine("Message : ");
                 message = Console.ReadLine();
-                string msg = JsonConvert.SerializeObject(message);
+     
                 var body = Encoding.UTF8.GetBytes(message);
 
                 channel.BasicPublish(exchange: "",
