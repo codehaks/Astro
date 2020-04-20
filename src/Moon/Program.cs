@@ -20,7 +20,7 @@ namespace Moon
             var consumer = new EventingBasicConsumer(channel);
             consumer.Received += Consumer_Received;
 
-            channel.BasicConsume(queue: "inbox", autoAck: false, consumer: consumer);
+            channel.BasicConsume(queue: "inbox", autoAck: true, consumer: consumer);
 
             Console.ReadLine();
 
