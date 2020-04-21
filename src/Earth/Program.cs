@@ -36,11 +36,11 @@ namespace Earth
                                autoDelete: false,
                                arguments: null);
 
-            channel.ExchangeDeclare("emergency", "direct", true, false, null);
+            channel.ExchangeDeclare("emergency", "topic", true, false, null);
 
-            channel.QueueBind("a", "emergency", "apple");
-            channel.QueueBind("b", "emergency", "lemon");
-            channel.QueueBind("c", "emergency", "apple");
+            channel.QueueBind("a", "emergency", "red.*");
+            channel.QueueBind("b", "emergency", "*.report.*");
+            channel.QueueBind("c", "emergency", "*.critical");
 
             //--- Chat
 
@@ -53,8 +53,8 @@ namespace Earth
      
                 var body = Encoding.UTF8.GetBytes(message);
 
-                channel.BasicPublish("",
-                     routingKey: "lemon",
+                channel.BasicPublish("emergency",
+                     routingKey: "red.order",
                      basicProperties: null,
                      body: body);
 
