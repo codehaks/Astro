@@ -18,11 +18,29 @@ namespace Earth
             using var channel = connection.CreateModel();
             
 
-            channel.QueueDeclare(queue: "inbox",
+            channel.QueueDeclare(queue: "a",
                                  durable: false,
                                  exclusive: false,
                                  autoDelete: false,
                                  arguments: null);
+
+            channel.QueueDeclare(queue: "b",
+                                durable: false,
+                                exclusive: false,
+                                autoDelete: false,
+                                arguments: null);
+
+            channel.QueueDeclare(queue: "c",
+                               durable: false,
+                               exclusive: false,
+                               autoDelete: false,
+                               arguments: null);
+
+            channel.ExchangeDeclare("emergency", "direct", true, false, null);
+
+            channel.QueueBind("a", "emergency", "apple");
+            channel.QueueBind("b", "emergency", "lemon");
+            channel.QueueBind("c", "emergency", "apple");
 
             //--- Chat
 
@@ -35,8 +53,8 @@ namespace Earth
      
                 var body = Encoding.UTF8.GetBytes(message);
 
-                channel.BasicPublish(exchange: "",
-                     routingKey: "inbox",
+                channel.BasicPublish("",
+                     routingKey: "lemon",
                      basicProperties: null,
                      body: body);
 
